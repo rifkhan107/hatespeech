@@ -42,7 +42,7 @@ pipeline {
                 // Change to the correct directory
                 dir('BitsPlease/Implementation/hatespeech-frontend') {
                     // Start the application using npm start in the background
-                    sh 'nohup npm start &'
+                    sh 'npm start &'
                 }
             }
         }
