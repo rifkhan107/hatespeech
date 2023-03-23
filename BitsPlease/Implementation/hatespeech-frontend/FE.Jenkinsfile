@@ -36,5 +36,18 @@ pipeline {
                 sh "sudo cp -r BitsPlease/Implementation/hatespeech-frontend/build/* ${DEPLOY_DIR}"
             }
         }
+
+        stage('Run') {
+            steps {
+                // Change to the correct directory
+                dir('BitsPlease/Implementation/hatespeech-frontend') {
+                    // Install http-server globally
+                    sh 'sudo npm install -g http-server'
+
+                    // Start the HTTP server on port 3000 in the background
+                    sh 'nohup http-server ${DEPLOY_DIR} -p 3000 --cors --silent &'
+                }
+            }
+        }
     }
 }
