@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Change to the correct directory
-                dir('Implementation/hatespeech-frontend') {
+                dir('BitsPlease/Implementation/hatespeech-frontend') {
                     // Install dependencies
                     sh 'npm install'
 
@@ -33,7 +33,7 @@ pipeline {
                 sh "sudo mkdir -p ${DEPLOY_DIR}"
 
                 // Copy the build output to the deployment directory
-                sh "sudo cp -r Implementation/hatespeech-frontend/build/* ${DEPLOY_DIR}"
+                sh "sudo cp -r BitsPlease/Implementation/hatespeech-frontend/build/* ${DEPLOY_DIR}"
             }
         }
     }
