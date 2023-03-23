@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         APP_NAME = "hatespeech-frontend"
-        APP_DIR = "/var/www/html"
-        NGINX_CONFIG_FILE = "/etc/nginx/sites-available/${APP_NAME}"
+        DEPLOY_DIR = "/var/www/html/${APP_NAME}"
     }
 
     stages {
@@ -30,22 +29,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Copy the built files to the web root directory
-                sh "sudo cp -r Implementation/hatespeech-frontend/build/* ${APP_DIR}/"
+                // Create the deployment directory if it doesn't exist
+                sh "sudo mkdir -p ${DEPLOY_DIR}"
 
-                // Create the Nginx server block configuration file
-                withCredentials([string(credentialsId: 'nginx-config', variable: 'NGINX_CONFIG')]) {
-                    writeFile file: NGINX_CONFIG_FILE, text: "${env.NGINX_CONFIG}\n"
-                }
-
-                // Enable the new configuration file
-                sh "sudo ln -s ${NGINX_CONFIG_FILE} /etc/nginx/sites-enabled/"
-
-                // Test the configuration
-                sh "sudo nginx -t"
-
-                // Restart Nginx to apply the changes
-                sh "sudo systemctl restart nginx"
+                // Copy the build output to the deployment directory
+                sh "sudo cp -r Implementation/hatespeech-frontend/build/* ${DEPLOY_DIR}"
             }
         }
     }
