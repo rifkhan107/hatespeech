@@ -41,8 +41,9 @@ pipeline {
             steps {
                 // Change to the correct directory
                 dir('BitsPlease/Implementation/hatespeech-frontend') {
-                    // Install http-server globally
-                    sh 'sudo npm start'
+                    // Start the application using npm start in the background
+                    sh 'nohup npm start &'
+                }
             }
         }
     }
