@@ -27,16 +27,6 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Create the deployment directory if it doesn't exist
-                sh "sudo mkdir -p ${DEPLOY_DIR}"
-
-                // Copy the build output to the deployment directory
-                sh "sudo cp -r BitsPlease/Implementation/hatespeech-frontend/build/* ${DEPLOY_DIR}"
-            }
-        }
-
         stage('Run') {
             steps {
                 // Change to the correct directory
