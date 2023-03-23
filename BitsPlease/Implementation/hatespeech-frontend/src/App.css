@@ -1,0 +1,15 @@
+#logo {
+  margin: 2%;
+  width: 106px;
+  height: 102px;
+  color: black;
+}
+
+#marginAdder {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background-color: rgb(108, 71, 71);
+}
